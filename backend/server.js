@@ -6,6 +6,9 @@ const postRoute = require("./routes/postRoute");
 
 const app = express();
 
+app.use(express.json()); // to parse json
+app.use(express.urlencoded({ extended: true })); // to parse urlencoded data
+
 connectDB(); //db connection
 
 app.get("/", (req, res) => {
@@ -13,13 +16,13 @@ app.get("/", (req, res) => {
 });
 
 //all routes
-app.use("/post", postRoute);
+app.use("/api/post", postRoute);
 
 // error handler
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
-  console.log("server is running on port ", 5000);
+  console.log("server is running on port ", PORT);
 });
