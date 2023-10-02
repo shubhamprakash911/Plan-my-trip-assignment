@@ -2,6 +2,7 @@ require("dotenv").config(); //loads environment variables from a .env file into 
 const express = require("express");
 const connectDB = require("./config/db");
 const { notFound, errorHandler } = require("./middlewares/errorHandler");
+const postRoute = require("./routes/postRoute");
 
 const app = express();
 
@@ -11,6 +12,10 @@ app.get("/", (req, res) => {
   res.send({ message: "server is running fine" });
 });
 
+//all routes
+app.use("/post", postRoute);
+
+// error handler
 app.use(notFound);
 app.use(errorHandler);
 
